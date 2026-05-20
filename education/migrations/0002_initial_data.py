@@ -36,8 +36,8 @@ def populate_initial_data(apps, schema_editor):
     # 2. Poblar Definiciones de IA
     AIDefinition.objects.bulk_create([
         AIDefinition(
-            author="Alan Turing (Padre de la Computación)",
-            definition="Una máquina puede ser considerada inteligente si logra engañar a un evaluador humano, haciéndole creer que sus respuestas son generadas por otra persona a través de un canal de comunicación textual ciego.",
+            author="IEEE (Asociación de Ingenieros Eléctricos y Electrónicos)",
+            definition="Sistemas que muestran comportamientos asociados con la inteligencia humana, como aprender, razonar, resolver problemas, comprender el lenguaje y percibir el entorno.",
             image_path=None,
             order=1
         ),
