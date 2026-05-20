@@ -1,0 +1,134 @@
+{% extends 'education/base.html' %}
+{% load static %}
+
+{% block title %}Contenido Académico - Proyecto Educativo sobre IA{% endblock %}
+
+{% block content %}
+<!-- Content Hero Header -->
+<header class="content-header" id="edu-content-header">
+    <div class="content-header-glow"></div>
+    <div class="content-header-container">
+        <span class="content-header-tag fade-in-up">Material de Estudio Protegido</span>
+        <h1 class="content-header-title fade-in-up" id="welcome-user-title">Bienvenido al Módulo de IA, <span
+                class="text-highlight">{{ user.username }}</span></h1>
+        <p class="content-header-desc fade-in-up">
+            Desciende por la página para descubrir los contenidos académicos preparados para ti. Los conceptos se irán
+            revelando progresivamente a medida que exploras.
+        </p>
+        <div class="scroll-indicator fade-in-up">
+            <span class="scroll-text">Desplázate hacia abajo para descubrir</span>
+            <div class="scroll-mouse">
+                <span class="scroll-wheel"></span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="educational-wrapper">
+    <!-- Section 1: AI Definitions by Authors -->
+    <section class="edu-section" id="ai-definitions-sec">
+        <div class="section-container">
+            <div class="section-header scroll-reveal">
+                <span class="section-subtitle">Perspectivas Teóricas</span>
+                <h2 class="section-title" id="definitions-heading">1. Definiciones de Inteligencia Artificial</h2>
+                <p class="section-desc">¿Cómo se puede definir este campo? Algunos aportes:</p>
+            </div>
+
+            <div class="definitions-timeline" id="definitions-timeline-container">
+                {% for item in ai_definitions %}
+                <div class="definition-item scroll-reveal" id="def-item-{{ item.id }}">
+                    <div class="timeline-dot"></div>
+                    <div class="definition-card hover-card">
+                        <span class="def-author-badge">{{ item.author }}</span>
+                        <blockquote class="def-text">
+                            "{{ item.definition }}"
+                        </blockquote>
+                        {% if item.image_path %}
+                        <div class="def-image-container">
+                            <img src="{% static item.image_path %}" alt="Imagen explicativa para {{ item.author }}">
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% empty %}
+                <p class="no-content-message">No hay definiciones de IA disponibles.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider Line -->
+    <div class="section-divider scroll-reveal"></div>
+
+    <!-- Section 2: Neural Networks General Concept -->
+    <section class="edu-section" id="neural-networks-sec">
+        <div class="section-container">
+            {% if nn_concept %}
+            <div class="concept-block scroll-reveal" id="nn-concept-card">
+                <div class="concept-content">
+                    <span class="section-subtitle">Arquitectura de Cómputo</span>
+                    <h2 class="concept-title" id="concept-main-title">2. {{ nn_concept.name }}</h2>
+                    <div class="concept-description">
+                        <p>{{ nn_concept.description }}</p>
+                    </div>
+                </div>
+                {% if nn_concept.image_path %}
+                <div class="concept-visual">
+                    <div class="concept-image-wrapper">
+                        <img src="{% static nn_concept.image_path %}" alt="Esquema de Redes Neuronales Artificiales"
+                            id="concept-diagram-img">
+                        <div class="concept-image-overlay"></div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            {% else %}
+            <p class="no-content-message">El concepto de Redes Neuronales Artificiales no está disponible.</p>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Divider Line -->
+    <div class="section-divider scroll-reveal"></div>
+
+    <!-- Section 3: 7 Types of Neural Networks -->
+    <section class="edu-section" id="neural-types-sec">
+        <div class="section-container">
+            <div class="section-header scroll-reveal">
+                <span class="section-subtitle">Clasificación Estructural</span>
+                <h2 class="section-title" id="network-types-title">3. Tipos de Redes Neuronales Artificiales</h2>
+                <p class="section-desc">Explora las 7 arquitecturas de redes neuronales más relevantes de la disciplina,
+                    detallando sus características y su modo operativo.</p>
+            </div>
+
+            <div class="network-types-list" id="nn-types-staggered-list">
+                {% for net in nn_types %}
+                <div class="network-type-card scroll-reveal {% if forloop.counter|divisibleby:2 %}card-reverse{% endif %}"
+                    id="net-type-card-{{ net.id }}">
+                    <div class="net-card-body">
+                        <div class="net-header">
+                            <span class="net-number">Fascículo 0{{ forloop.counter }}</span>
+                            <h3 class="net-title">{{ net.name }}</h3>
+                        </div>
+
+                        <div class="net-content-grid">
+                            <div class="net-desc-block">
+                                <h4>¿Qué es?</h4>
+                                <p>{{ net.description }}</p>
+                            </div>
+                            <div class="net-works-block">
+                                <h4>¿Cómo funciona?</h4>
+                                <p>{{ net.how_it_works }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="net-card-border-glow"></div>
+                </div>
+                {% empty %}
+                <p class="no-content-message">No hay tipos de redes neuronales registrados.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

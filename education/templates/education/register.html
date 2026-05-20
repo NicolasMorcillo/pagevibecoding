@@ -1,0 +1,65 @@
+{% extends 'education/base.html' %}
+{% load static %}
+
+{% block title %}Registrarse - Proyecto Educativo sobre IA{% endblock %}
+
+{% block content %}
+<section class="auth-section" id="register-auth-section">
+    <div class="auth-background-shapes">
+        <div class="shape-1"></div>
+        <div class="shape-2"></div>
+    </div>
+    
+    <div class="auth-container">
+        <div class="auth-card" id="register-form-card">
+            <div class="auth-card-header">
+                <h1 class="auth-title" id="register-card-title">Crear Cuenta Académica</h1>
+                <p class="auth-subtitle">Regístrate para acceder de inmediato al material de estudio</p>
+            </div>
+            
+            <form method="POST" action="{% url 'register' %}" class="auth-form" id="register-html-form">
+                {% csrf_token %}
+                
+                {% if form.non_field_errors %}
+                    <div class="form-errors" id="register-general-errors">
+                        {% for error in form.non_field_errors %}
+                            <p class="error-text">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {% for field in form %}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                        <div class="input-wrapper">
+                            <!-- Renderizamos el campo nativo de Django, el cual estilizaremos con CSS -->
+                            {{ field }}
+                        </div>
+                        
+                        {% if field.help_text %}
+                            <span class="form-help-text">{{ field.help_text }}</span>
+                        {% endif %}
+                        
+                        {% if field.errors %}
+                            <div class="field-errors">
+                                {% for error in field.errors %}
+                                    <span class="error-msg">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                <button type="submit" class="btn btn-primary btn-full hover-btn" id="register-submit-btn">
+                    <span>Crear Cuenta y Acceder</span>
+                    <span class="btn-arrow">&rarr;</span>
+                </button>
+            </form>
+
+            <div class="auth-card-footer">
+                <p>¿Ya tienes una cuenta? <a href="{% url 'login' %}" class="auth-link" id="register-link-to-login">Inicia sesión aquí</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

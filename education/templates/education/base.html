@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Proyecto Educativo sobre IA{% endblock %}</title>
+    <!-- Google Fonts: Outfit (para títulos y acentos) e Inter (para lectura clara) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- Iconos SVG sencillos o FontAwesome si se requiere (usaremos SVGs para limpieza) -->
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+    <!-- Barra de Navegación -->
+    <nav class="navbar" id="main-navbar">
+        <div class="nav-container">
+            <a href="{% url 'landing' %}" class="nav-brand" id="nav-brand-link">
+                <span class="brand-glow"></span>
+                <span class="brand-text">NAM AIEdu.</span>
+            </a>
+
+            <button class="nav-toggle" id="nav-menu-toggle" aria-label="Abrir menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="nav-menu-links">
+                <li><a href="{% url 'landing' %}"
+                        class="nav-link {% if request.resolver_match.url_name == 'landing' %}active{% endif %}"
+                        id="nav-link-landing">Inicio</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'content' %}"
+                        class="nav-link {% if request.resolver_match.url_name == 'content' %}active{% endif %}"
+                        id="nav-link-content">Contenido Educativo</a></li>
+                <li class="nav-user-info">
+                    <span class="user-badge" id="navbar-user-badge">
+                        <span class="user-dot"></span>
+                        {{ user.username }}
+                    </span>
+                </li>
+                <li><a href="{% url 'logout' %}" class="nav-btn btn-secondary" id="nav-btn-logout">Cerrar Sesión</a>
+                </li>
+                {% else %}
+                <li><a href="{% url 'login' %}"
+                        class="nav-link {% if request.resolver_match.url_name == 'login' %}active{% endif %}"
+                        id="nav-link-login">Ingresar</a></li>
+                <li><a href="{% url 'register' %}" class="nav-btn btn-primary" id="nav-btn-register">Registrarse</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Contenedor de Mensajes de Django -->
+    {% if messages %}
+    <div class="messages-container" id="toast-messages-container">
+        {% for message in messages %}
+        <div class="toast-message {{ message.tags }}" role="alert">
+            <span class="toast-text">{{ message }}</span>
+            <button class="toast-close" onclick="this.parentElement.remove()" aria-label="Cerrar">&times;</button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Contenido Principal -->
+    <main class="main-content" id="main-content-layout">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Pie de Página -->
+    <footer class="footer" id="main-footer">
+        <div class="footer-container">
+            <p>&copy; {% now "Y" %} <strong>Proyecto Educativo sobre IA</strong>. Diseñado con fines académicos.</p>
+            <p class="footer-subtext">Construido a través de Vibecode por Nicolás Morcillo utilizando Gemini 3.5 Flash.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts globales -->
+    <script src="{% static 'js/main.js' %}"></script>
+    <script>
+        // Lógica simple para expandir el menú responsive en móviles
+        const toggleBtn = document.getElementById('nav-menu-toggle');
+        const menuLinks = document.getElementById('nav-menu-links');
+        if (toggleBtn && menuLinks) {
+            toggleBtn.addEventListener('click', () => {
+                menuLinks.classList.toggle('open');
+                toggleBtn.classList.toggle('active');
+            });
+        }
+
+        // Auto-eliminar los mensajes toast después de 4 segundos
+        setTimeout(() => {
+            const toasts = document.querySelectorAll('.toast-message');
+            toasts.forEach(toast => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(-10px)';
+                setTimeout(() => toast.remove(), 400);
+            });
+        }, 4000);
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+{% extends 'education/base.html' %}
+{% load static %}
+
+{% block title %}Ingresar - Proyecto Educativo sobre IA{% endblock %}
+
+{% block content %}
+<section class="auth-section" id="login-auth-section">
+    <div class="auth-background-shapes">
+        <div class="shape-1"></div>
+        <div class="shape-2"></div>
+    </div>
+    
+    <div class="auth-container">
+        <div class="auth-card" id="login-form-card">
+            <div class="auth-card-header">
+                <h1 class="auth-title" id="login-card-title">Acceso de Alumnos</h1>
+                <p class="auth-subtitle">Ingresa tus credenciales para acceder al material didáctico</p>
+            </div>
+            
+            <form method="POST" action="{% url 'login' %}" class="auth-form" id="login-html-form">
+                {% csrf_token %}
+                
+                {% if form.non_field_errors %}
+                    <div class="form-errors" id="login-general-errors">
+                        {% for error in form.non_field_errors %}
+                            <p class="error-text">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="form-group">
+                    <label for="id_username" class="form-label">Nombre de Usuario</label>
+                    <div class="input-wrapper">
+                        <input type="text" name="username" autofocus required id="id_username" class="form-input {% if form.username.errors %}input-error{% endif %}" placeholder="Ej. juan_perez">
+                        <span class="input-icon">👤</span>
+                    </div>
+                    {% if form.username.errors %}
+                        <div class="field-errors">
+                            {% for error in form.username.errors %}
+                                <span class="error-msg">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_password" class="form-label">Contraseña</label>
+                    <div class="input-wrapper">
+                        <input type="password" name="password" required id="id_password" class="form-input {% if form.password.errors %}input-error{% endif %}" placeholder="••••••••">
+                        <span class="input-icon">🔑</span>
+                    </div>
+                    {% if form.password.errors %}
+                        <div class="field-errors">
+                            {% for error in form.password.errors %}
+                                <span class="error-msg">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full hover-btn" id="login-submit-btn">
+                    <span>Iniciar Sesión</span>
+                    <span class="btn-arrow">&rarr;</span>
+                </button>
+            </form>
+
+            <div class="auth-card-footer">
+                <p>¿Aún no tienes un usuario? <a href="{% url 'register' %}" class="auth-link" id="login-link-to-register">Regístrate gratis aquí</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

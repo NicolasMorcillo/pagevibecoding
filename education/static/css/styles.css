@@ -1,0 +1,1394 @@
+/* -------------------------------------------------------------
+   SISTEMA DE DISEÑO & VARIABLES (Estilo Tecnológico y Profesional)
+   ------------------------------------------------------------- */
+:root {
+    /* Paleta de Colores (Basada en HSL) */
+    --bg-primary: hsl(222, 47%, 7%);       /* Fondo ultra oscuro slate */
+    --bg-secondary: hsl(222, 40%, 11%);    /* Fondo secundario oscuro */
+    --bg-tertiary: hsl(222, 35%, 15%);     /* Fondo de tarjetas / nav */
+    
+    --primary: #0ea5e9;                    /* Cian tecnológico */
+    --primary-hover: #38bdf8;
+    --primary-rgb: 14, 165, 233;
+    
+    --secondary: #6366f1;                  /* Índigo suave */
+    --secondary-hover: #818cf8;
+    --secondary-rgb: 99, 102, 241;
+    
+    --accent: #10b981;                     /* Esmeralda (Éxito / Acentos) */
+    --error: #ef4444;                      /* Rojo vibrante (Errores) */
+    
+    --text-primary: #f8fafc;               /* Texto principal blanco hueso */
+    --text-secondary: #e2e8f0;             /* Texto secundario gris claro */
+    --text-muted: #94a3b8;                 /* Texto atenuado gris oscuro */
+    
+    --border-color: rgba(148, 163, 184, 0.12);
+    --border-focus: rgba(14, 165, 233, 0.4);
+    
+    /* Efectos de Sombras y Resplandores */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.6);
+    --glow-primary: 0 0 20px rgba(14, 165, 233, 0.25);
+    --glow-secondary: 0 0 20px rgba(99, 102, 241, 0.25);
+    
+    /* Tipografía y Espaciados */
+    --font-headings: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+    
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    
+    --transition-smooth: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --transition-reveal: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* -------------------------------------------------------------
+   ESTILOS GENERALES Y RESETS
+   ------------------------------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Scrollbar Personalizado */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-sm);
+    border: 2px solid var(--bg-primary);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+/* -------------------------------------------------------------
+   NAVEGACIÓN (Navbar de Vidrio Glaseado)
+   ------------------------------------------------------------- */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 76px;
+    background-color: rgba(11, 15, 25, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 1000;
+    transition: var(--transition-smooth);
+}
+
+.nav-container {
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-brand {
+    position: relative;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-family: var(--font-headings);
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--text-primary);
+}
+
+.brand-text {
+    background: linear-gradient(135deg, var(--text-primary) 30%, var(--primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.brand-glow {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background-color: var(--primary);
+    filter: blur(15px);
+    opacity: 0.5;
+    left: -5px;
+    border-radius: 50%;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 32px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: var(--transition-smooth);
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--primary);
+}
+
+.nav-user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background-color: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--secondary-hover);
+}
+
+.user-dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent);
+}
+
+/* Botones del Navbar */
+.nav-btn {
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: var(--radius-sm);
+    transition: var(--transition-smooth);
+}
+
+/* Hamburguesa Responsive */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.nav-toggle span {
+    width: 100%;
+    height: 2px;
+    background-color: var(--text-primary);
+    transition: var(--transition-smooth);
+}
+
+/* -------------------------------------------------------------
+   BOTONES E INPUTS COMUNES
+   ------------------------------------------------------------- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-headings);
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    border: none;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, #0284c7 100%);
+    color: var(--bg-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--primary-hover) 0%, var(--primary) 100%);
+    box-shadow: var(--glow-primary), var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: rgba(248, 250, 252, 0.08);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background-color: rgba(248, 250, 252, 0.15);
+    border-color: var(--text-muted);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--text-primary);
+    border: 2px solid var(--primary);
+}
+
+.btn-outline:hover {
+    background-color: rgba(14, 165, 233, 0.1);
+    box-shadow: var(--glow-primary);
+    transform: translateY(-2px);
+}
+
+.btn-large {
+    padding: 14px 28px;
+    font-size: 1rem;
+}
+
+.btn-full {
+    width: 100%;
+    padding: 12px 24px;
+    font-size: 0.95rem;
+}
+
+/* Formulario General y Inputs */
+.form-group {
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: left;
+}
+
+.form-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* Estilización directa de inputs inyectados por Django */
+.input-wrapper input,
+.form-input {
+    width: 100%;
+    padding: 12px 16px 12px 40px;
+    background-color: rgba(7, 11, 19, 0.6);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    outline: none;
+    transition: var(--transition-smooth);
+}
+
+.input-wrapper input:focus,
+.form-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px var(--border-focus);
+    background-color: rgba(7, 11, 19, 0.9);
+}
+
+.input-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.95rem;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Textos de ayuda de Django Forms */
+.form-help-text, .helptext {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* Errores en inputs */
+.field-errors {
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.error-msg {
+    font-size: 0.75rem;
+    color: var(--error);
+    font-weight: 500;
+}
+
+.form-errors {
+    background-color: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: var(--radius-sm);
+    padding: 12px;
+    margin-bottom: 20px;
+}
+
+.error-text {
+    color: #f87171;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* -------------------------------------------------------------
+   LANDING HERO SECTION
+   ------------------------------------------------------------- */
+.hero-section {
+    position: relative;
+    padding: 140px 0 100px;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-primary);
+    overflow: hidden;
+}
+
+.hero-background-gradient {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, rgba(99, 102, 241, 0.04) 50%, transparent 100%);
+    top: -100px;
+    right: -100px;
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 48px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-text-content {
+    text-align: left;
+}
+
+.hero-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background-color: rgba(14, 165, 233, 0.1);
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    color: var(--primary-hover);
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+}
+
+.hero-title {
+    font-family: var(--font-headings);
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #ffffff 40%, #cbd5e1 70%, var(--primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 36px;
+    max-width: 580px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 16px;
+}
+
+.hero-visual {
+    display: flex;
+    justify-content: center;
+}
+
+.hero-image-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.hero-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 6s ease-out;
+}
+
+.hero-image-wrapper:hover .hero-img {
+    transform: scale(1.08);
+}
+
+.hero-img-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0 0 80px rgba(14, 165, 233, 0.2);
+    pointer-events: none;
+}
+
+/* -------------------------------------------------------------
+   SECCIONES COMUNES
+   ------------------------------------------------------------- */
+.section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 24px;
+}
+
+.section-header {
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto 60px;
+}
+
+.section-subtitle {
+    display: inline-block;
+    color: var(--secondary-hover);
+    font-family: var(--font-headings);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.section-title {
+    font-family: var(--font-headings);
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.section-desc {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.5;
+}
+
+/* -------------------------------------------------------------
+   LANDING CURIOSIDADES (Tarjetas con Hover Sutil)
+   ------------------------------------------------------------- */
+.curiosities-section {
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+}
+
+.curiosities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 28px;
+}
+
+.curiosity-card {
+    position: relative;
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: var(--transition-smooth);
+}
+
+.card-glow-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+    transition: var(--transition-smooth);
+}
+
+.card-icon-wrapper {
+    margin-bottom: 24px;
+}
+
+.card-number {
+    font-family: var(--font-headings);
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0.8;
+}
+
+.card-title {
+    font-family: var(--font-headings);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.card-text {
+    font-size: 0.925rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Efectos al pasar el mouse */
+.hover-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(14, 165, 233, 0.25);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), 0 0 15px rgba(14, 165, 233, 0.05);
+}
+
+.hover-card:hover .card-glow-effect {
+    opacity: 1;
+    background: radial-gradient(circle at top right, rgba(14, 165, 233, 0.12) 0%, transparent 70%);
+}
+
+/* -------------------------------------------------------------
+   LANDING CALL TO ACTION
+   ------------------------------------------------------------- */
+.cta-section {
+    position: relative;
+    background-color: var(--bg-primary);
+    border-top: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.cta-gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at 50% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 80%);
+    pointer-events: none;
+}
+
+.cta-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 100px 24px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.cta-title {
+    font-family: var(--font-headings);
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.cta-description {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+/* -------------------------------------------------------------
+   SECCIÓN DE AUTENTICACIÓN (LOGIN Y REGISTRO)
+   ------------------------------------------------------------- */
+.auth-section {
+    position: relative;
+    min-height: calc(100vh - 150px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 24px 80px;
+    background-color: var(--bg-primary);
+    overflow: hidden;
+}
+
+.auth-background-shapes .shape-1,
+.auth-background-shapes .shape-2 {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.35;
+    z-index: 0;
+}
+
+.auth-background-shapes .shape-1 {
+    width: 300px;
+    height: 300px;
+    background-color: var(--primary);
+    top: 20%;
+    left: 15%;
+}
+
+.auth-background-shapes .shape-2 {
+    width: 350px;
+    height: 350px;
+    background-color: var(--secondary);
+    bottom: 15%;
+    right: 15%;
+}
+
+.auth-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 480px;
+}
+
+.auth-card {
+    background-color: rgba(24, 32, 50, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 48px;
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+}
+
+.auth-card-header {
+    margin-bottom: 36px;
+}
+
+.auth-title {
+    font-family: var(--font-headings);
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.auth-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Modificación para el renderizado del formulario de Django */
+.auth-form ul {
+    list-style: none;
+    margin: 8px 0;
+    padding: 0;
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="password"] {
+    width: 100%;
+    padding: 12px 16px;
+    background-color: rgba(7, 11, 19, 0.5);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    outline: none;
+    transition: var(--transition-smooth);
+}
+
+.auth-form input[type="text"]:focus,
+.auth-form input[type="password"]:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px var(--border-focus);
+    background-color: rgba(7, 11, 19, 0.8);
+}
+
+.btn-arrow {
+    display: inline-block;
+    margin-left: 8px;
+    transition: transform var(--transition-smooth);
+}
+
+.hover-btn:hover .btn-arrow {
+    transform: translateX(4px);
+}
+
+.auth-card-footer {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+}
+
+.auth-card-footer p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+}
+
+.auth-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+}
+
+.auth-link:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+/* -------------------------------------------------------------
+   CONTENIDO PROTEGIDO (Página de Estudio)
+   ------------------------------------------------------------- */
+.content-header {
+    position: relative;
+    padding: 160px 0 100px;
+    background-color: var(--bg-primary);
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.content-header-glow {
+    position: absolute;
+    top: -150px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 400px;
+    background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.content-header-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+}
+
+.content-header-tag {
+    display: inline-block;
+    padding: 6px 14px;
+    background-color: rgba(99, 102, 241, 0.12);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    color: var(--secondary-hover);
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.content-header-title {
+    font-family: var(--font-headings);
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.2;
+    margin-bottom: 24px;
+}
+
+.text-highlight {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary-hover) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.content-header-desc {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+/* Indicador de Desplazamiento */
+.scroll-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.scroll-text {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.scroll-mouse {
+    width: 20px;
+    height: 32px;
+    border: 2px solid var(--text-muted);
+    border-radius: 20px;
+    position: relative;
+}
+
+.scroll-wheel {
+    width: 4px;
+    height: 6px;
+    background-color: var(--primary);
+    border-radius: 2px;
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scrollWheelAnim 1.6s infinite;
+}
+
+@keyframes scrollWheelAnim {
+    0% {
+        top: 6px;
+        opacity: 1;
+    }
+    100% {
+        top: 18px;
+        opacity: 0;
+    }
+}
+
+.educational-wrapper {
+    background-color: var(--bg-secondary);
+}
+
+.section-divider {
+    max-width: 1200px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--border-color) 20%, var(--border-color) 80%, transparent 100%);
+    margin: 0 auto;
+}
+
+/* -------------------------------------------------------------
+   SECCIÓN 1: LÍNEA DE TIEMPO DE DEFINICIONES
+   ------------------------------------------------------------- */
+.definitions-timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/* Línea Vertical */
+.definitions-timeline::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background: linear-gradient(180deg, var(--secondary) 0%, var(--primary) 70%, transparent 100%);
+    top: 0;
+    bottom: 0;
+    left: 32px;
+}
+
+.definition-item {
+    position: relative;
+    margin-bottom: 48px;
+    padding-left: 72px;
+}
+
+.timeline-dot {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--bg-secondary);
+    border: 3px solid var(--primary);
+    left: 25px;
+    top: 24px;
+    box-shadow: 0 0 8px var(--primary);
+    z-index: 2;
+}
+
+.definition-card {
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    position: relative;
+    transition: var(--transition-smooth);
+}
+
+.def-author-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background-color: rgba(14, 165, 233, 0.08);
+    border: 1px solid rgba(14, 165, 233, 0.15);
+    color: var(--primary-hover);
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.def-text {
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* -------------------------------------------------------------
+   SECCIÓN 2: CONCEPTO PRINCIPAL (Redes Neuronales)
+   ------------------------------------------------------------- */
+.concept-block {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: center;
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 48px;
+    overflow: hidden;
+}
+
+.concept-title {
+    font-family: var(--font-headings);
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-top: 8px;
+    margin-bottom: 24px;
+}
+
+.concept-description p {
+    font-size: 1.025rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+}
+
+.concept-visual {
+    display: flex;
+    justify-content: center;
+}
+
+.concept-image-wrapper {
+    position: relative;
+    width: 100%;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.concept-image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 8s ease;
+}
+
+.concept-image-wrapper:hover img {
+    transform: scale(1.05);
+}
+
+.concept-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0 0 40px rgba(99, 102, 241, 0.2);
+    pointer-events: none;
+}
+
+/* -------------------------------------------------------------
+   SECCIÓN 3: 7 TIPOS DE REDES NEURONALES (Diseño Escalonado)
+   ------------------------------------------------------------- */
+.network-types-list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.network-type-card {
+    position: relative;
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: var(--transition-smooth);
+}
+
+.net-card-body {
+    padding: 40px;
+    position: relative;
+    z-index: 2;
+}
+
+.net-header {
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.net-number {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--primary);
+    letter-spacing: 1px;
+}
+
+.net-title {
+    font-family: var(--font-headings);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    width: 100%;
+    margin-top: 4px;
+}
+
+.net-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 36px;
+}
+
+.net-desc-block h4,
+.net-works-block h4 {
+    font-family: var(--font-headings);
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--secondary-hover);
+    margin-bottom: 10px;
+}
+
+.net-desc-block p,
+.net-works-block p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.net-card-border-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+    opacity: 0.6;
+    transition: var(--transition-smooth);
+}
+
+/* Efecto hover en tipo de red neuronal */
+.network-type-card:hover {
+    border-color: rgba(99, 102, 241, 0.25);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+    transform: translateY(-3px);
+}
+
+.network-type-card:hover .net-card-border-glow {
+    width: 6px;
+    opacity: 1;
+}
+
+/* -------------------------------------------------------------
+   PIE DE PÁGINA
+   ------------------------------------------------------------- */
+.footer {
+    background-color: var(--bg-primary);
+    border-top: 1px solid var(--border-color);
+    padding: 40px 24px;
+    text-align: center;
+    margin-top: auto;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.footer-subtext {
+    margin-top: 8px;
+    font-size: 0.78rem !important;
+    opacity: 0.7;
+}
+
+/* -------------------------------------------------------------
+   ANIMACIÓN DE DESCUBRIMIENTO POR SCROLL (CLASES JS)
+   ------------------------------------------------------------- */
+/* Estado Inicial antes del Reveal */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity var(--transition-reveal), transform var(--transition-reveal);
+    will-change: transform, opacity;
+}
+
+/* Estado Final después del Reveal (Clase inyectada por JS) */
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Animaciones Simples de Entrada al Cargar */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-actions.fade-in-up {
+    animation-delay: 0.4s;
+}
+
+.hero-badge.fade-in-up {
+    animation-delay: 0.1s;
+}
+
+.hero-subtitle.fade-in-up {
+    animation-delay: 0.3s;
+}
+
+.hero-title.fade-in-up {
+    animation-delay: 0.2s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* -------------------------------------------------------------
+   MENSAJES TOAST (Alertas de Django)
+   ------------------------------------------------------------- */
+.messages-container {
+    position: fixed;
+    top: 96px;
+    right: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 1010;
+    max-width: 380px;
+    width: calc(100% - 48px);
+}
+
+.toast-message {
+    background-color: var(--bg-tertiary);
+    border-left: 4px solid var(--secondary);
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border: 1px solid var(--border-color);
+    border-left-width: 4px;
+    transition: opacity var(--transition-smooth), transform var(--transition-smooth);
+}
+
+.toast-message.success {
+    border-left-color: var(--accent);
+}
+
+.toast-message.error {
+    border-left-color: var(--error);
+}
+
+.toast-message.info {
+    border-left-color: var(--primary);
+}
+
+.toast-text {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.toast-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.toast-close:hover {
+    color: var(--text-primary);
+}
+
+/* -------------------------------------------------------------
+   DISEÑO RESPONSIVO (Breakpoints)
+   ------------------------------------------------------------- */
+@media (max-width: 992px) {
+    .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 32px;
+    }
+    
+    .hero-text-content {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .hero-title {
+        font-size: 3rem;
+    }
+    
+    .concept-block {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 32px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Navbar responsive */
+    .nav-toggle {
+        display: flex;
+    }
+    
+    .nav-links {
+        position: absolute;
+        top: 75px;
+        left: 0;
+        width: 100%;
+        background-color: var(--bg-secondary);
+        border-bottom: 1px solid var(--border-color);
+        flex-direction: column;
+        padding: 24px;
+        gap: 20px;
+        transform: translateY(-150%);
+        opacity: 0;
+        transition: transform var(--transition-smooth), opacity var(--transition-smooth);
+        pointer-events: none;
+    }
+    
+    .nav-links.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+    }
+    
+    /* Efecto animado del botón hamburguesa */
+    .nav-toggle.active span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .nav-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+    .nav-toggle.active span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+    
+    .definitions-timeline::before {
+        left: 16px;
+    }
+    
+    .definition-item {
+        padding-left: 44px;
+    }
+    
+    .timeline-dot {
+        left: 9px;
+    }
+    
+    .net-content-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .auth-card {
+        padding: 32px 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-actions, .cta-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+    }
+    
+    .btn-large {
+        width: 100%;
+    }
+}
