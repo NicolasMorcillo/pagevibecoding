@@ -1,6 +1,6 @@
 # Proyecto Educativo sobre Inteligencia Artificial
 
-Este es un proyecto web académico e interactivo desarrollado en **Python** utilizando el framework **Django**. Ha sido diseñado siguiendo las mejores prácticas de la arquitectura **MTV (Model-Template-View)** y con un estilo visual premium de corte tecnológico, ideal para fines evaluativos y su publicación en GitHub.
+Este es un proyecto académico que tiene como fin el desarrollo de una página web a través del vibecoding utilizando el lenguaje **Python** y el framework **Django**.
 
 ---
 
